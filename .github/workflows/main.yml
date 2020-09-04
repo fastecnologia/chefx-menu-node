@@ -36,7 +36,8 @@ jobs:
           target: "~/app/chefx-menu-node"
       
         # Executar "yarn" na Digital Ocean
-      - name: Install dependences on Digital Ocean
+        # Restart servidor Node.js
+      - name: Install dependences on Digital Ocean and run production
         uses: appleboy/ssh-action@master
         with:
           host: ${{ secrets.SSH_HOST }}
@@ -45,14 +46,5 @@ jobs:
           key: ${{ secrets.SSH_KEY }}
           script: | 
             cd ~/app/chefx-menu-node
-            yarn 
-      
-        # Restart servidor Node.js
-      - name: Restart server
-        uses: appleboy/ssh-action@master
-        with:
-          host: ${{ secrets.SSH_HOST }}
-          username: ${{ secrets.SSH_USER }}
-          port: ${{ secrets.SSH_PORT }}
-          key: ${{ secrets.SSH_KEY }}
-          script: pm2 restart chefxmenu-api
+            yarn
+            pm2 restart chefxmenu-api
