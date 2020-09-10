@@ -1,5 +1,5 @@
-import IUpdateProductDTO from '../dtos/IUpdateProductDTO';
+import Menu from '../../menu/infra/typeorm/schemas/Menu';
 
 export default interface IProductRepository {
-    update(data: IUpdateProductDTO): Promise<void>;
+    update(menu: Menu): Promise<Menu>;
 }

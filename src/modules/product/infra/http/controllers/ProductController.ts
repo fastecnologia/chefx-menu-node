@@ -1,4 +1,7 @@
 import { Request, Response } from 'express';
+import { container } from 'tsyringe';
+
+import UpdateProductservice from '../../../services/UpdateProductService';
 
 export default class ProductController {
     public async update(
@@ -6,7 +9,19 @@ export default class ProductController {
         response: Response,
     ): Promise<Response> {
         const { customer_url } = request.params;
+        const { id, name, price, category_id, description } = request.body;
 
-        return response.json({ customer_url });
+        const updateProductService = container.resolve(UpdateProductservice);
+
+        const menu = await updateProductService.execute({
+            customer_url,
+            id,
+            name,
+            price,
+            category_id,
+            description,
+        });
+
+        return response.json({ menu });
     }
 }
