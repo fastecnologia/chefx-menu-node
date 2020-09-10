@@ -22,6 +22,6 @@ export default class ProductController {
             description,
         });
 
-        return response.json({ menu });
+        return response.status(200).json(menu);
     }
 }
