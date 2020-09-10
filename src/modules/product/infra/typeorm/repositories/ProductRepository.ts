@@ -1,6 +1,6 @@
 import { MongoRepository, getMongoRepository } from 'typeorm';
 
-import IProductRepository from 'modules/product/repositories/IProductRepository';
+import IProductRepository from '../../../repositories/IProductRepository';
 import Menu from '../../../../menu/infra/typeorm/schemas/Menu';
 
 class ProductRepository implements IProductRepository {

@@ -1,7 +1,16 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
+import AddProductMenuService from '../../../services/AddProductMenuService';
 import UpdateProductService from '../../../services/UpdateProductService';
+
+interface IRequest {
+    id: number;
+    name: string;
+    price: string;
+    category_id: number;
+    description: string;
+}
 
 export default class ProductController {
     public async update(
@@ -23,5 +32,31 @@ export default class ProductController {
         });
 
         return response.status(200).json(menu);
+    }
+
+    public async create(
+        request: Request,
+        response: Response,
+    ): Promise<Response> {
+        const { customer_url } = request.params;
+        const {
+            id,
+            name,
+            price,
+            category_id,
+            description,
+        } = request.body as IRequest;
+
+        const addProductMenuService = container.resolve(AddProductMenuService);
+
+        const menu = await addProductMenuService.execute(customer_url, {
+            id,
+            name,
+            price,
+            category_id,
+            description,
+        });
+
+        return response.status(201).json(menu);
     }
 }
