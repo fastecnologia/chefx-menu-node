@@ -10,7 +10,7 @@ class ProductRepository implements IProductRepository {
         this.ormRepository = getMongoRepository(Menu, 'mongo');
     }
 
-    public async update(menu: Menu): Promise<Menu> {
+    public async save(menu: Menu): Promise<Menu> {
         await this.ormRepository.save(menu);
 
         return menu;
