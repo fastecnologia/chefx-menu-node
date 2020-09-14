@@ -3,8 +3,9 @@ import { container } from 'tsyringe';
 
 import AddProductMenuService from '../../../services/AddProductMenuService';
 import UpdateProductService from '../../../services/UpdateProductService';
+import DeleteProductService from '../../../services/DeleteProductService';
 
-interface IRequest {
+interface IRequestCreate {
     id: number;
     name: string;
     price: string;
@@ -45,7 +46,7 @@ export default class ProductController {
             price,
             category_id,
             description,
-        } = request.body as IRequest;
+        } = request.body as IRequestCreate;
 
         const addProductMenuService = container.resolve(AddProductMenuService);
 
@@ -58,5 +59,18 @@ export default class ProductController {
         });
 
         return response.status(201).json(menu);
+    }
+
+    public async delete(
+        request: Request,
+        response: Response,
+    ): Promise<Response> {
+        const { customer_url, id } = request.params;
+
+        const deleteProductService = container.resolve(DeleteProductService);
+
+        await deleteProductService.execute({ customer_url, id: Number(id) });
+
+        return response.status(200).send('Product deleted');
     }
 }
