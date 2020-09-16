@@ -1,4 +1,4 @@
-import { getMongoRepository, MongoRepository } from 'typeorm';
+import { getMongoRepository, MongoRepository, ObjectID } from 'typeorm';
 
 import IMenuRepository from 'modules/menu/repositories/IMenuRepository';
 import ICreateMenuDTO from 'modules/menu/dtos/ICreateMenuDTO';
@@ -43,6 +43,10 @@ class MenuRepository implements IMenuRepository {
 
     public async save(menu: Menu): Promise<Menu> {
         return this.ormRepository.save(menu);
+    }
+
+    public async delete(id: ObjectID): Promise<void> {
+        await this.ormRepository.deleteOne({ _id: id });
     }
 }
 
