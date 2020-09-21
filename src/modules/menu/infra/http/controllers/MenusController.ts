@@ -77,6 +77,6 @@ export default class MenusController {
 
         await deleteMenuService.execute(customer_url);
 
-        return response.status(200).send('Menu deleted');
+        return response.status(200).send();
     }
 }
