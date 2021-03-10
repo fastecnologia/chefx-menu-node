@@ -4,6 +4,7 @@ import { container } from 'tsyringe';
 import CreateMenuService from '../../../services/CreateMenuService';
 import ListMenuByCustomerService from '../../../services/ListMenuByCustomerService';
 import UpdateMenuService from '../../../services/UpdateMenuService';
+import DeleteMenuService from '../../../services/DeleteMenuService';
 
 export default class MenusController {
     public async show(request: Request, response: Response): Promise<Response> {
@@ -64,5 +65,18 @@ export default class MenusController {
         });
 
         return response.status(200).json(menu);
+    }
+
+    public async delete(
+        request: Request,
+        response: Response,
+    ): Promise<Response> {
+        const { customer_url } = request.params;
+
+        const deleteMenuService = container.resolve(DeleteMenuService);
+
+        await deleteMenuService.execute(customer_url);
+
+        return response.status(200).send();
     }
 }
