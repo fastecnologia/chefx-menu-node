@@ -46,6 +46,7 @@ class UpdateProductService {
     const updateProduct = productJSONArray.map(product => {
       if (product.id === id) {
         return {
+          ...product,
           id,
           name,
           price,
