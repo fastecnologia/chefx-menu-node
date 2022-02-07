@@ -15,11 +15,8 @@ import '../../container';
 
 const app = express();
 
-app.use(
-  cors(),
-); /* evita que alguns sites que não sejam confiáveis da nossa aplicação possam acessar nosso site */
-
 app.use(express.json());
+app.use(cors());
 app.use(routes);
 app.use('/image_product', express.static(uploadConfig.tmpFolder));
 
