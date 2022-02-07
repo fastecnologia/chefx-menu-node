@@ -6,7 +6,7 @@ import { UploadImageProductService } from '../../../services/UploadImageProductS
 class ProductImageUploadController {
   public async upload(request: Request, response: Response): Promise<Response> {
     const { customer_url, id } = request.params;
-    const imageFilename = request.file?.filename;
+    const imageFilename = request.file.filename;
 
     const uploadImageProductService = container.resolve(
       UploadImageProductService,
