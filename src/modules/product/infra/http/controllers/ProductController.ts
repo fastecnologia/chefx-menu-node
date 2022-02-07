@@ -62,6 +62,6 @@ export default class ProductController {
 
     await deleteProductService.execute({ customer_url, id: Number(id) });
 
-    return response.status(200).send();
+    return response.status(204).send();
   }
 }
