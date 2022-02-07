@@ -6,20 +6,20 @@ import Menu from '../infra/typeorm/schemas/Menu';
 
 @injectable()
 class ListMenuByCustomerService {
-    constructor(
-        @inject('MenuRepository')
-        private menuRepository: IMenuRepository,
-    ) {}
+  constructor(
+    @inject('MenuRepository')
+    private menuRepository: IMenuRepository,
+  ) {}
 
-    public async execute(customer_url: string): Promise<Menu | undefined> {
-        const menu = await this.menuRepository.findMenuByCustomer(customer_url);
+  public async execute(customer_url: string): Promise<Menu | undefined> {
+    const menu = await this.menuRepository.findMenuByCustomer(customer_url);
 
-        if (!menu) {
-            throw new AppError('Menu not exists');
-        }
-
-        return menu;
+    if (!menu) {
+      throw new AppError('Menu not exists');
     }
+
+    return menu;
+  }
 }
 
 export default ListMenuByCustomerService;
