@@ -8,40 +8,38 @@ import IMenuRepository from '../repositories/IMenuRepository';
 
 @injectable()
 class CreateMenuService {
-    constructor(
-        @inject('MenuRepository')
-        private menuRepository: IMenuRepository,
-    ) {}
+  constructor(
+    @inject('MenuRepository')
+    private menuRepository: IMenuRepository,
+  ) {}
 
-    public async execute({
-        customer_name,
-        customer_url,
-        categories,
-        products,
-        extra_products,
-    }: ICreateMenuDTO): Promise<Menu> {
-        const menuExists = await this.menuRepository.findMenuByCustomer(
-            customer_url,
-        );
+  public async execute({
+    customer_name,
+    customer_url,
+    categories,
+    products,
+  }: ICreateMenuDTO): Promise<Menu> {
+    const menuExists = await this.menuRepository.findMenuByCustomer(
+      customer_url,
+    );
 
-        if (menuExists) {
-            throw new AppError('Menu already exists');
-        }
-
-        // const categoriesFormattedJSON = JSON.stringify(categories);
-        // const productsFormattedJSON = JSON.stringify(products);
-        // const extraProductsFormattedJSON = JSON.stringify(extra_products);
-
-        const menu = await this.menuRepository.create({
-            customer_name,
-            customer_url,
-            categories,
-            products,
-            extra_products,
-        });
-
-        return menu;
+    if (menuExists) {
+      throw new AppError('Menu already exists');
     }
+
+    // const categoriesFormattedJSON = JSON.stringify(categories);
+    // const productsFormattedJSON = JSON.stringify(products);
+    // const extraProductsFormattedJSON = JSON.stringify(extra_products);
+
+    const menu = await this.menuRepository.create({
+      customer_name,
+      customer_url,
+      categories,
+      products,
+    });
+
+    return menu;
+  }
 }
 
 export default CreateMenuService;

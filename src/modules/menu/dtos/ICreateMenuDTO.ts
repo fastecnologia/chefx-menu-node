@@ -3,5 +3,4 @@ export default interface ICreateMenuDTO {
   customer_url: string;
   categories: string;
   products: string;
-  extra_products: string;
 }
