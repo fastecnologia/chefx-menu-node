@@ -5,20 +5,20 @@ import IMenuRepository from '../repositories/IMenuRepository';
 
 @injectable()
 class DeleteMenuService {
-    constructor(
-        @inject('MenuRepository')
-        private menuRepository: IMenuRepository,
-    ) {}
+  constructor(
+    @inject('MenuRepository')
+    private menuRepository: IMenuRepository,
+  ) {}
 
-    public async execute(customer_url: string): Promise<void> {
-        const menu = await this.menuRepository.findMenuByCustomer(customer_url);
+  public async execute(customer_url: string): Promise<void> {
+    const menu = await this.menuRepository.findMenuByCustomer(customer_url);
 
-        if (!menu) {
-            throw new AppError('Menu not exists');
-        }
-
-        await this.menuRepository.delete(menu.id);
+    if (!menu) {
+      throw new AppError('Menu not exists');
     }
+
+    await this.menuRepository.delete(menu.id);
+  }
 }
 
 export default DeleteMenuService;

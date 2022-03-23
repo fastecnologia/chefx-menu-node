@@ -7,12 +7,28 @@ import AppError from '../../../shared/errors/AppError';
 import IMenuRepository from '../../menu/repositories/IMenuRepository';
 import IProductRepository from '../repositories/IProductRepository';
 
+interface IExtraProduct {
+  id: number;
+  name: string;
+  price: string;
+}
+
+interface IPizzaFlavor {
+  id: number;
+  name: string;
+  price: string;
+}
+
 interface IProductJSON {
   id: number;
   name: string;
   price: string;
   category_id: number;
   description: string;
+  is_pizza: boolean;
+  count_flavors: number;
+  extra_products: Array<IExtraProduct>;
+  pizza_flavors: Array<IPizzaFlavor>;
   image: string;
 }
 
@@ -51,8 +67,8 @@ class UploadImageProductService {
       IProductJSON
     >;
 
-    const productFinIndex = productJSONArray.findIndex(prod => prod.id === id);
-    const product = productJSONArray[productFinIndex];
+    const productFindIndex = productJSONArray.findIndex(prod => prod.id === id);
+    const product = productJSONArray[productFindIndex];
 
     if (product.image) {
       await this.storageProvider.deleteFile(product.image, customer_url);
@@ -70,7 +86,7 @@ class UploadImageProductService {
 
     product.image = `${customer_url}/${filename}`;
 
-    productJSONArray[productFinIndex] = product;
+    productJSONArray[productFindIndex] = product;
 
     menu.products = JSON.parse(JSON.stringify(productJSONArray));
 
