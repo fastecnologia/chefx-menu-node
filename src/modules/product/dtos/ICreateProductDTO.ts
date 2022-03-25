@@ -16,6 +16,8 @@ export default interface ICreateProductDTO {
   price: string;
   category_id: number;
   description: string;
+  is_promotional: boolean;
+  promotional_price: string;
   is_pizza: boolean;
   count_flavors: number;
   extra_products: Array<IExtraProduct>;

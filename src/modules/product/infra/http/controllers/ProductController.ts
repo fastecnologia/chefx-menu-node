@@ -5,18 +5,22 @@ import AddProductMenuService from '../../../services/AddProductMenuService';
 import UpdateProductService from '../../../services/UpdateProductService';
 import DeleteProductService from '../../../services/DeleteProductService';
 
-interface IRequestCreate {
-  id: number;
-  name: string;
-  price: string;
-  category_id: number;
-  description: string;
-}
-
 export default class ProductController {
   public async update(request: Request, response: Response): Promise<Response> {
     const { customer_url } = request.params;
-    const { id, name, price, category_id, description } = request.body;
+    const {
+      id,
+      name,
+      price,
+      category_id,
+      description,
+      is_promotional,
+      promotional_price,
+      is_pizza,
+      count_flavors,
+      extra_products,
+      pizza_flavors,
+    } = request.body;
 
     const updateProductService = container.resolve(UpdateProductService);
 
@@ -27,6 +31,12 @@ export default class ProductController {
       price,
       category_id,
       description,
+      is_promotional,
+      promotional_price,
+      is_pizza,
+      count_flavors,
+      extra_products,
+      pizza_flavors,
     });
 
     return response.status(200).json(menu);
@@ -40,7 +50,13 @@ export default class ProductController {
       price,
       category_id,
       description,
-    } = request.body as IRequestCreate;
+      is_promotional,
+      promotional_price,
+      is_pizza,
+      count_flavors,
+      extra_products,
+      pizza_flavors,
+    } = request.body;
 
     const addProductMenuService = container.resolve(AddProductMenuService);
 
@@ -50,6 +66,12 @@ export default class ProductController {
       price,
       category_id,
       description,
+      is_promotional,
+      promotional_price,
+      is_pizza,
+      count_flavors,
+      extra_products,
+      pizza_flavors,
     });
 
     return response.status(201).json(menu);

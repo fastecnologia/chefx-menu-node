@@ -25,6 +25,8 @@ interface IProductJSON {
   price: string;
   category_id: number;
   description: string;
+  is_promotional: boolean;
+  promotional_price: string;
   is_pizza: boolean;
   count_flavors: number;
   extra_products: Array<IExtraProduct>;
@@ -48,6 +50,8 @@ class UpdateProductService {
     price,
     category_id,
     description,
+    is_promotional,
+    promotional_price,
     is_pizza,
     count_flavors,
     extra_products,
@@ -72,6 +76,8 @@ class UpdateProductService {
           price,
           category_id,
           description,
+          is_promotional,
+          promotional_price,
           is_pizza,
           count_flavors,
           extra_products,
