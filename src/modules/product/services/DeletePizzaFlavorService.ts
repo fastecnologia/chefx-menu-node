@@ -2,9 +2,7 @@ import { injectable, inject } from 'tsyringe';
 
 import AppError from '../../../shared/errors/AppError';
 
-import Menu from '../../menu/infra/typeorm/schemas/Menu';
 import IMenuRepository from '../../menu/repositories/IMenuRepository';
-import IProductRepository from '../repositories/IProductRepository';
 
 interface IExtraProduct {
   id: number;
@@ -36,31 +34,24 @@ interface IRequest {
   customer_url: string;
   product_id: number;
   flavor_id: number;
-  name: string;
-  price: string;
 }
 
 @injectable()
-class UpdatePizzaFlavorService {
+class DeletePizzaFlavorService {
   constructor(
     @inject('MenuRepository')
     private menuRepository: IMenuRepository,
-
-    @inject('ProductRepository')
-    private productRepository: IProductRepository,
   ) {}
 
   public async execute({
     customer_url,
     product_id,
     flavor_id,
-    name,
-    price,
-  }: IRequest): Promise<Menu> {
+  }: IRequest): Promise<void> {
     const menu = await this.menuRepository.findMenuByCustomer(customer_url);
 
     if (!menu) {
-      throw new AppError('Menu not found!', 404);
+      throw new AppError('Menu not found!');
     }
 
     const convertStringToJSON = JSON.stringify(menu.products);
@@ -68,35 +59,29 @@ class UpdatePizzaFlavorService {
       IProductJSON
     >;
 
-    const updateProductPizzaFlavor = productJSONArray.map(product => {
+    const productsArray: Array<IProductJSON> = [];
+    productJSONArray.forEach(product => {
       if (product.id === product_id) {
-        const updateFlavor = product.pizza_flavors.map(flavor => {
-          if (flavor.id === flavor_id) {
-            return {
-              ...flavor,
-              name,
-              price,
-            };
-          }
+        const prod = product;
 
-          return flavor;
-        });
+        const deleteFlavor = prod.pizza_flavors.filter(
+          pizza_flavor => pizza_flavor.id !== flavor_id,
+        );
 
-        return {
-          ...product,
-          pizza_flavors: updateFlavor,
-        };
+        prod.pizza_flavors = deleteFlavor;
+
+        productsArray.push(prod);
+
+        return;
       }
 
-      return product;
+      productsArray.push(product);
     });
 
-    menu.products = JSON.parse(JSON.stringify(updateProductPizzaFlavor));
+    menu.products = JSON.parse(JSON.stringify(productsArray));
 
-    await this.productRepository.save(menu);
-
-    return menu;
+    await this.menuRepository.save(menu);
   }
 }
 
-export default UpdatePizzaFlavorService;
+export default DeletePizzaFlavorService;
