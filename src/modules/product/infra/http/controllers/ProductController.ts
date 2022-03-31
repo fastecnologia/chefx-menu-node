@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
-import AddProductMenuService from '../../../services/AddProductMenuService';
-import UpdateProductService from '../../../services/UpdateProductService';
-import DeleteProductService from '../../../services/DeleteProductService';
+import AddProductMenuService from '@modules/product/services/AddProductMenuService';
+import UpdateProductService from '@modules/product/services/UpdateProductService';
+import DeleteProductService from '@modules/product/services/DeleteProductService';
 
 export default class ProductController {
   public async update(request: Request, response: Response): Promise<Response> {

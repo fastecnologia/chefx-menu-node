@@ -5,7 +5,7 @@
   "license": "MIT",
   "scripts": {
     "build": "babel src --extensions \".js,.ts\" --out-dir dist --copy-files",
-    "dev:server": "tsnd --transpile-only --ignore-watch node_modules --respawn src/shared/infra/http/server.ts"
+    "dev:server": "tsnd -r tsconfig-paths/register --transpile-only --ignore-watch node_modules --respawn src/shared/infra/http/server.ts"
   },
   "devDependencies": {
     "@babel/cli": "^7.11.5",
@@ -31,6 +31,7 @@
     "eslint-plugin-prettier": "^3.1.4",
     "prettier": "^2.0.5",
     "ts-node-dev": "^1.0.0-pre.59",
+    "tsconfig-paths": "^3.14.1",
     "typescript": "^4.0.2"
   },
   "dependencies": {

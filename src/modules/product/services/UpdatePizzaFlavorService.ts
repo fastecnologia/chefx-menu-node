@@ -1,6 +1,6 @@
 import { injectable, inject } from 'tsyringe';
 
-import AppError from '../../../shared/errors/AppError';
+import AppError from '@shared/errors/AppError';
 
 import Menu from '../../menu/infra/typeorm/schemas/Menu';
 import IMenuRepository from '../../menu/repositories/IMenuRepository';

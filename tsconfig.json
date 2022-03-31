@@ -6,12 +6,20 @@
     "outDir": "./dist",
     "rootDir": "./src",
     "baseUrl": "./src",
+    "paths": {
+      "@modules/*": ["modules/*"],
+      "@config/*": ["config/*"],
+      "@shared/*": ["shared/*"]
+    },
     "strict": true,
     "strictPropertyInitialization": false,
     "esModuleInterop": true,
-    "experimentalDecorators": true, 
-    "emitDecoratorMetadata": true, 
-    "skipLibCheck": true, 
+    "experimentalDecorators": true,
+    "emitDecoratorMetadata": true,
+    "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true
-  }
+  },
+  "include": [
+    "./src"
+  ]
 }

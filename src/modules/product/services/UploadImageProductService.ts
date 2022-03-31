@@ -1,9 +1,9 @@
 import { injectable, inject } from 'tsyringe';
 
-import Menu from 'modules/menu/infra/typeorm/schemas/Menu';
+import Menu from '@modules/menu/infra/typeorm/schemas/Menu';
 
-import { IStorageProvider } from '../../../shared/container/providers/StorageProvider/models/IStorageProvider';
-import AppError from '../../../shared/errors/AppError';
+import { IStorageProvider } from '@shared/container/providers/StorageProvider/models/IStorageProvider';
+import AppError from '@shared/errors/AppError';
 import IMenuRepository from '../../menu/repositories/IMenuRepository';
 import IProductRepository from '../repositories/IProductRepository';
 

@@ -1,9 +1,9 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
-import AddPizzaFlavorService from '../../../services/AddPizzaFlavorService';
-import UpdatePizzaFlavorService from '../../../services/UpdatePizzaFlavorService';
-import DeletePizzaFlavorService from '../../../services/DeletePizzaFlavorService';
+import AddPizzaFlavorService from '@modules/product/services/AddPizzaFlavorService';
+import UpdatePizzaFlavorService from '@modules/product/services/UpdatePizzaFlavorService';
+import DeletePizzaFlavorService from '@modules/product/services/DeletePizzaFlavorService';
 
 class PizzaFlavorController {
   public async create(request: Request, response: Response): Promise<Response> {
