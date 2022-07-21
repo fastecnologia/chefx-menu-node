@@ -5,7 +5,7 @@ import PizzaFlavorController from '../controllers/PizzaFlavorController';
 const pizzaFlavorsRouter = Router();
 const pizzaFlavorsController = new PizzaFlavorController();
 
-pizzaFlavorsRouter.post('/', pizzaFlavorsController.create);
+pizzaFlavorsRouter.post('/:customer_url', pizzaFlavorsController.create);
 pizzaFlavorsRouter.put('/:customer_url', pizzaFlavorsController.update);
 pizzaFlavorsRouter.delete(
   '/:customer_url/:product_id/:flavor_id',

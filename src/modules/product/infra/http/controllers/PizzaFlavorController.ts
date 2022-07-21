@@ -7,7 +7,8 @@ import DeletePizzaFlavorService from '@modules/product/services/DeletePizzaFlavo
 
 class PizzaFlavorController {
   public async create(request: Request, response: Response): Promise<Response> {
-    const { customer_url, product_id, flavor_id, name, price } = request.body;
+    const { customer_url } = request.params;
+    const { product_id, flavor_id, name, price } = request.body;
 
     const addPizzaFlavorService = container.resolve(AddPizzaFlavorService);
 
