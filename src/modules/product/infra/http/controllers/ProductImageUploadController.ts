@@ -1,7 +1,7 @@
 import { Request, Response } from 'express';
 import { container } from 'tsyringe';
 
-import { UploadImageProductService } from '@modules/product/services/UploadImageProductService';
+import { UploadImageProductService } from '../../../services/UploadImageProductService';
 
 class ProductImageUploadController {
   public async upload(request: Request, response: Response): Promise<Response> {

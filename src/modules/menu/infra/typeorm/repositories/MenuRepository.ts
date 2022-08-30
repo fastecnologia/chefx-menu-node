@@ -1,7 +1,7 @@
 import { getMongoRepository, MongoRepository, ObjectID } from 'typeorm';
 
-import IMenuRepository from '@modules/menu/repositories/IMenuRepository';
-import ICreateMenuDTO from '@modules/menu/dtos/ICreateMenuDTO';
+import ICreateMenuDTO from '../../../dtos/ICreateMenuDTO';
+import IMenuRepository from '../../../repositories/IMenuRepository';
 import Menu from '../schemas/Menu';
 
 class MenuRepository implements IMenuRepository {

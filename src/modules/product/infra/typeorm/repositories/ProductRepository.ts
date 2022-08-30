@@ -1,7 +1,7 @@
 import { MongoRepository, getMongoRepository } from 'typeorm';
 
-import IProductRepository from '@modules/product/repositories/IProductRepository';
-import Menu from '@modules/menu/infra/typeorm/schemas/Menu';
+import Menu from '../../../../menu/infra/typeorm/schemas/Menu';
+import IProductRepository from '../../../repositories/IProductRepository';
 
 class ProductRepository implements IProductRepository {
   private ormRepository: MongoRepository<Menu>;
