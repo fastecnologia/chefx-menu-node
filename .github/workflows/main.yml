@@ -18,7 +18,7 @@ jobs:
       - name: Setup Node.js environment
         uses: actions/setup-node@v1.4.3
         with:
-          node-version: 16.x
+          node-version: 20.x
         
         # Instalar as dependencias
       - name: Install dependencies
