@@ -18,7 +18,13 @@ export default class MenusController {
   }
 
   public async create(request: Request, response: Response): Promise<Response> {
-    const { customer_name, customer_url, categories, products } = request.body;
+    const {
+      customer_name,
+      customer_url,
+      categories,
+      products,
+      extra_products,
+    } = request.body;
 
     const menuService = container.resolve(CreateMenuService);
 
@@ -27,6 +33,7 @@ export default class MenusController {
       customer_url,
       categories,
       products,
+      extra_products,
     });
 
     return response.status(201).json(menu);
@@ -34,7 +41,12 @@ export default class MenusController {
 
   public async update(request: Request, response: Response): Promise<Response> {
     const { customer_url } = request.params;
-    const { customer_name, categories, products } = request.body;
+    const {
+      customer_name,
+      categories,
+      products,
+      extra_products,
+    } = request.body;
 
     const updateService = container.resolve(UpdateMenuService);
 
@@ -43,6 +55,7 @@ export default class MenusController {
       customer_url,
       categories,
       products,
+      extra_products,
     });
 
     return response.status(200).json(menu);

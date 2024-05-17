@@ -10,6 +10,7 @@ interface IRequest {
   customer_url: string;
   categories: string;
   products: string;
+  extra_products: string;
 }
 
 @injectable()
@@ -24,6 +25,7 @@ class UpdateMenuService {
     customer_url,
     categories,
     products,
+    extra_products,
   }: IRequest): Promise<Menu> {
     const menu = await this.menuRepository.findMenuByCustomer(customer_url);
 
@@ -34,6 +36,7 @@ class UpdateMenuService {
     menu.customer_name = customer_name;
     menu.categories = categories;
     menu.products = products;
+    menu.extra_products = extra_products;
 
     return this.menuRepository.save(menu);
   }
