@@ -26,12 +26,14 @@ class MenuRepository implements IMenuRepository {
     customer_url,
     categories,
     products,
+    extra_products,
   }: ICreateMenuDTO): Promise<Menu> {
     const menu = this.ormRepository.create({
       customer_name,
       customer_url,
       categories,
       products,
+      extra_products,
     });
 
     await this.ormRepository.save(menu);

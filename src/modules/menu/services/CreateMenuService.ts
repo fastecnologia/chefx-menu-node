@@ -18,6 +18,7 @@ class CreateMenuService {
     customer_url,
     categories,
     products,
+    extra_products,
   }: ICreateMenuDTO): Promise<Menu> {
     const menuExists = await this.menuRepository.findMenuByCustomer(
       customer_url,
@@ -36,6 +37,7 @@ class CreateMenuService {
       customer_url,
       categories,
       products,
+      extra_products,
     });
 
     return menu;

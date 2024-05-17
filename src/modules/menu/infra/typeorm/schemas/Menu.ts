@@ -24,6 +24,9 @@ class Menu {
   @Column()
   products: string;
 
+  @Column()
+  extra_products: string;
+
   @CreateDateColumn()
   created_at: Date;
 
