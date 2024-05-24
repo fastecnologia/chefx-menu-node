@@ -31,9 +31,10 @@ class S3StorageProvider implements IStorageProvider {
     const fileContent = await fs.promises.readFile(originalPath);
 
     const putObject = new PutObjectCommand({
-      Bucket: `${process.env.AWS_BUCKET}/${folder}`,
-      Key: file,
+      Bucket: `${process.env.AWS_BUCKET}`,
+      Key: `${folder}/${file}`,
       Body: fileContent,
+      ACL: 'public-read',
     });
 
     await this.client.send(putObject);
@@ -55,8 +56,8 @@ class S3StorageProvider implements IStorageProvider {
 
   public async deleteFile(file: string, folder: string): Promise<void> {
     const deleteObject = new DeleteObjectCommand({
-      Bucket: `${process.env.AWS_BUCKET}/${folder}`,
-      Key: file,
+      Bucket: `${process.env.AWS_BUCKET}`,
+      Key: `${folder}/${file}`,
     });
 
     await this.client.send(deleteObject);
