@@ -3,3 +3,8 @@ node_modules/
 ormconfig.json
 dist/
 
+!tmp/.gitkeep
+
+*.png
+*.jpg
+*.jpeg

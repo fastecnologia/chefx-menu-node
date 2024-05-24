@@ -14,6 +14,7 @@ interface IProductJSON {
   category_id: number;
   description: string;
   image: string;
+  image_url: string;
 }
 
 interface IRequest {
@@ -68,7 +69,9 @@ class UploadImageProductService {
       customer_url,
     );
 
-    product.image = `${customer_url}/${filename}`;
+    // product.image = `${customer_url}/${filename}`;
+    product.image = `${filename}`;
+    product.image_url = `${process.env.AWS_BUCKET_URL}/${filename}`;
 
     productJSONArray[productFinIndex] = product;
 
