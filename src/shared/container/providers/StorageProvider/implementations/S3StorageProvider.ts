@@ -1,46 +1,46 @@
-// import fs from 'fs';
-// import path from 'path';
+import fs from 'fs';
+import path from 'path';
 
-// import {
-//   DeleteObjectCommand,
-//   PutObjectCommand,
-//   S3Client,
-// } from '@aws-sdk/client-s3';
+import {
+  DeleteObjectCommand,
+  PutObjectCommand,
+  S3Client,
+} from '@aws-sdk/client-s3';
 
-// import mime from 'mime-types';
+import mime from 'mime-types';
 
-// import uploadConfig from '../../../../../config/upload';
+import uploadConfig from '../../../../../config/upload';
 
 import { IStorageProvider } from '../models/IStorageProvider';
 
 class S3StorageProvider implements IStorageProvider {
-  // private client: S3Client;
+  private client: S3Client;
 
   constructor() {
-    // this.client = new S3Client({
-    //   region: process.env.AWS_BUCKET_REGION,
-    // });
+    this.client = new S3Client({
+      region: process.env.AWS_BUCKET_REGION,
+    });
   }
 
   public async saveFile(file: string, folder: string): Promise<string> {
-    // const originalPath = path.resolve(uploadConfig.tmpFolder, file);
+    const originalPath = path.resolve(uploadConfig.tmpFolder, file);
 
-    // const ContentType = mime.contentType(originalPath);
+    const ContentType = mime.contentType(originalPath);
 
-    // if (!ContentType) {
-    //   throw new Error('File not found');
-    // }
+    if (!ContentType) {
+      throw new Error('File not found');
+    }
 
-    // const fileContent = await fs.promises.readFile(originalPath);
+    const fileContent = await fs.promises.readFile(originalPath);
 
-    // const putObject = new PutObjectCommand({
-    //   Bucket: process.env.AWS_BUCKET,
-    //   Key: `${folder}/${file}`,
-    //   Body: fileContent,
-    //   ACL: 'public-read',
-    // });
+    const putObject = new PutObjectCommand({
+      Bucket: process.env.AWS_BUCKET,
+      Key: `${folder}/${file}`,
+      Body: fileContent,
+      ACL: 'public-read',
+    });
 
-    // await this.client.send(putObject);
+    await this.client.send(putObject);
 
     // await this.client
     //   .putObject({
@@ -58,11 +58,12 @@ class S3StorageProvider implements IStorageProvider {
   }
 
   public async deleteFile(file: string, folder: string): Promise<void> {
-    // const deleteObject = new DeleteObjectCommand({
-    //   Bucket: process.env.AWS_BUCKET,
-    //   Key: `${folder}/${file}`,
-    // });
-    // await this.client.send(deleteObject);
+    const deleteObject = new DeleteObjectCommand({
+      Bucket: process.env.AWS_BUCKET,
+      Key: `${folder}/${file}`,
+    });
+    await this.client.send(deleteObject);
+
     // await this.client
     //   .deleteObject({
     //     Bucket: `${process.env.AWS_BUCKET}/${folder}`,
