@@ -38,6 +38,7 @@ class S3StorageProvider implements IStorageProvider {
       Key: `${folder}/${file}`,
       Body: fileContent,
       ACL: 'public-read',
+      ContentType,
     });
 
     await this.client.send(putObject);
