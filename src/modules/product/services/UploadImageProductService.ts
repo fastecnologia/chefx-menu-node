@@ -88,7 +88,7 @@ class UploadImageProductService {
 
     // product.image = `${customer_url}/${filename}`;
     product.image = `${filename}`;
-    product.image_url = `${process.env.AWS_BUCKET_URL}/${filename}`;
+    product.image_url = `${process.env.AWS_BUCKET_URL}/${menu.customer_url}/${filename}`;
 
     productJSONArray[productFindIndex] = product;
 
