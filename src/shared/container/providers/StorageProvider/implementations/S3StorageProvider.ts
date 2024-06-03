@@ -7,7 +7,7 @@ import {
   S3Client,
 } from '@aws-sdk/client-s3';
 
-import mime from 'mime-types';
+import mime from 'mime';
 
 import uploadConfig from '../../../../../config/upload';
 
@@ -25,7 +25,7 @@ class S3StorageProvider implements IStorageProvider {
   public async saveFile(file: string, folder: string): Promise<string> {
     const originalPath = path.resolve(uploadConfig.tmpFolder, file);
 
-    const ContentType = mime.contentType(originalPath);
+    const ContentType = mime.getType(originalPath);
 
     if (!ContentType) {
       throw new Error('File not found');
