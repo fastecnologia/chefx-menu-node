@@ -1,5 +1,7 @@
 import { injectable, inject } from 'tsyringe';
 
+import uploadConfig from '@config/upload';
+
 import AppError from '../../../shared/errors/AppError';
 
 import { IStorageProvider } from '../../../shared/container/providers/StorageProvider/models/IStorageProvider';
@@ -86,9 +88,14 @@ class UploadImageProductService {
       customer_url,
     );
 
+    const pathImage =
+      uploadConfig.driver === 'disk'
+        ? process.env.WEB_APP_URL
+        : process.env.AWS_BUCKET_URL;
+
     // product.image = `${customer_url}/${filename}`;
     product.image = `${filename}`;
-    product.image_url = `${process.env.AWS_BUCKET_URL}/${menu.customer_url}/${filename}`;
+    product.image_url = `${pathImage}/${menu.customer_url}/${filename}`;
 
     productJSONArray[productFindIndex] = product;
 
