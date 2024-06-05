@@ -17,7 +17,7 @@ productRouter.post('/:customer_url', productController.create);
 productRouter.put('/:customer_url', productController.update);
 productRouter.delete('/:customer_url/:id', productController.delete);
 
-productRouter.patch(
+productRouter.put(
   '/image/:customer_url/:id',
   upload.single('image'),
   productImageUploadController.upload,
