@@ -62,37 +62,37 @@ class UpdateMenuService {
       throw new AppError('This menu not exists');
     }
 
-    // const productsUpdate: IProduct[] = [];
+    const productsUpdate: IProduct[] = [];
 
-    // const menuProductExisted = JSON.parse(
-    //   JSON.stringify(menu.products),
-    // ) as IProduct[];
+    const menuProductExisted = JSON.parse(
+      JSON.stringify(menu.products),
+    ) as IProduct[];
     // const productParseJSON = JSON.parse(JSON.stringify(products)) as IProduct[];
 
-    // products.forEach(product => {
-    //   menuProductExisted.forEach(productExists => {
-    //     if (product.id === productExists.id) {
-    //       const prod = {
-    //         ...productExists,
-    //         id: product.id,
-    //         name: product.name,
-    //         category_id: product.category_id,
-    //         description: product.description,
-    //         is_promotional: product.is_promotional,
-    //         promotional_price: product.promotional_price,
-    //         is_pizza: product.is_pizza,
-    //         count_flavors: product.count_flavors,
-    //       };
+    products.forEach(product => {
+      menuProductExisted.forEach(productExists => {
+        if (product.id === productExists.id) {
+          const prod = {
+            ...productExists,
+            id: product.id,
+            name: product.name,
+            category_id: product.category_id,
+            description: product.description,
+            is_promotional: product.is_promotional,
+            promotional_price: product.promotional_price,
+            is_pizza: product.is_pizza,
+            count_flavors: product.count_flavors,
+          };
 
-    //       productsUpdate.push(prod);
-    //     }
-    //   });
-    // });
+          productsUpdate.push(prod);
+        }
+      });
+    });
 
     menu.customer_name = customer_name;
     menu.categories = categories;
-    // menu.products = JSON.parse(JSON.stringify(productsUpdate));
-    menu.products = JSON.parse(JSON.stringify(products));
+    menu.products = JSON.parse(JSON.stringify(productsUpdate));
+    // menu.products = JSON.parse(JSON.stringify(products));
     menu.extra_products = extra_products;
 
     return this.menuRepository.save(menu);
