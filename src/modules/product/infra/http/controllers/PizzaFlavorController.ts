@@ -8,7 +8,7 @@ import AddPizzaFlavorService from '../../../services/AddPizzaFlavorService';
 class PizzaFlavorController {
   public async create(request: Request, response: Response): Promise<Response> {
     const { customer_url } = request.params;
-    const { product_id, flavor_id, name, price } = request.body;
+    const { product_id, flavor_id, name, price, description } = request.body;
 
     const addPizzaFlavorService = container.resolve(AddPizzaFlavorService);
 
@@ -18,6 +18,7 @@ class PizzaFlavorController {
       flavor_id,
       name,
       price,
+      description,
     });
 
     return response.status(201).json(menu);
@@ -25,7 +26,7 @@ class PizzaFlavorController {
 
   public async update(request: Request, response: Response): Promise<Response> {
     const { customer_url } = request.params;
-    const { product_id, flavor_id, name, price } = request.body;
+    const { product_id, flavor_id, name, price, description } = request.body;
 
     const updatePizzaFlavorService = container.resolve(
       UpdatePizzaFlavorService,
@@ -37,6 +38,7 @@ class PizzaFlavorController {
       flavor_id,
       name,
       price,
+      description,
     });
 
     return response.status(200).json(menu);

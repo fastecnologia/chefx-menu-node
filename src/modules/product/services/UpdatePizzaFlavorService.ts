@@ -3,34 +3,41 @@ import { injectable, inject } from 'tsyringe';
 import AppError from '../../../shared/errors/AppError';
 
 import Menu from '../../menu/infra/typeorm/schemas/Menu';
+
 import IMenuRepository from '../../menu/repositories/IMenuRepository';
+
 import IProductRepository from '../repositories/IProductRepository';
 
-interface IExtraProduct {
-  id: number;
-  name: string;
-  price: string;
-}
+import { IProductJSON } from '../dtos/IProductDTO';
 
-interface IPizzaFlavor {
-  id: number;
-  name: string;
-  price: string;
-}
+// interface IExtraProduct {
+//   id: number;
+//   name: string;
+//   price: string;
+// }
 
-interface IProductJSON {
-  id: number;
-  name: string;
-  price: string;
-  category_id: number;
-  description: string;
-  is_promotional: boolean;
-  promotional_price: string;
-  is_pizza: boolean;
-  count_flavors: number;
-  extra_products: Array<IExtraProduct>;
-  pizza_flavors: Array<IPizzaFlavor>;
-}
+// interface IPizzaFlavor {
+//   id: number;
+//   name: string;
+//   price: string;
+//   description: string;
+// }
+
+// interface IProductJSON {
+//   id: number;
+//   name: string;
+//   price: string;
+//   category_id: number;
+//   description: string;
+//   is_promotional: boolean;
+//   promotional_price: string;
+//   is_pizza: boolean;
+//   count_flavors: number;
+//   image: string;
+//   image_url: string;
+//   extra_products: Array<IExtraProduct>;
+//   pizza_flavors: Array<IPizzaFlavor>;
+// }
 
 interface IRequest {
   customer_url: string;
@@ -38,6 +45,7 @@ interface IRequest {
   flavor_id: number;
   name: string;
   price: string;
+  description: string;
 }
 
 @injectable()
@@ -56,6 +64,7 @@ class UpdatePizzaFlavorService {
     flavor_id,
     name,
     price,
+    description,
   }: IRequest): Promise<Menu> {
     const menu = await this.menuRepository.findMenuByCustomer(customer_url);
 
@@ -76,6 +85,7 @@ class UpdatePizzaFlavorService {
               ...flavor,
               name,
               price,
+              description,
             };
           }
 

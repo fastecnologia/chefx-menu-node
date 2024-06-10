@@ -8,31 +8,36 @@ import IMenuRepository from '../../menu/repositories/IMenuRepository';
 
 import IProductRepository from '../repositories/IProductRepository';
 
-interface IPizzaFlavor {
-  id: number;
-  name: string;
-  price: string;
-}
+import { IPizzaFlavor, IProductJSON } from '../dtos/IProductDTO';
 
-interface IExtraProduct {
-  id: number;
-  name: string;
-  price: string;
-}
+// interface IPizzaFlavor {
+//   id: number;
+//   name: string;
+//   price: string;
+//   description: string;
+// }
 
-interface IProductJSON {
-  id: number;
-  name: string;
-  price: string;
-  category_id: number;
-  description: string;
-  is_promotional: boolean;
-  promotional_price: string;
-  is_pizza: boolean;
-  count_flavors: number;
-  extra_products: Array<IExtraProduct>;
-  pizza_flavors: Array<IPizzaFlavor>;
-}
+// interface IExtraProduct {
+//   id: number;
+//   name: string;
+//   price: string;
+// }
+
+// interface IProductJSON {
+//   id: number;
+//   name: string;
+//   price: string;
+//   category_id: number;
+//   description: string;
+//   is_promotional: boolean;
+//   promotional_price: string;
+//   is_pizza: boolean;
+//   count_flavors: number;
+//   image: string;
+//   image_url: string;
+//   extra_products: Array<IExtraProduct>;
+//   pizza_flavors: Array<IPizzaFlavor>;
+// }
 
 interface IRequest {
   customer_url: string;
@@ -40,6 +45,7 @@ interface IRequest {
   flavor_id: number;
   name: string;
   price: string;
+  description: string;
 }
 
 @injectable()
@@ -58,6 +64,7 @@ class AddPizzaFlavorService {
     flavor_id,
     name,
     price,
+    description,
   }: IRequest): Promise<Menu> {
     const menu = await this.menuRepository.findMenuByCustomer(customer_url);
 
@@ -69,6 +76,7 @@ class AddPizzaFlavorService {
       id: flavor_id,
       name,
       price,
+      description,
     } as IPizzaFlavor;
 
     const convertStringToJSON = JSON.stringify(menu.products);
