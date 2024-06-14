@@ -94,7 +94,7 @@ class UpdateProductService {
 
     menu.products = JSON.parse(JSON.stringify(updateProduct));
 
-    this.productRepository.save(menu);
+    await this.productRepository.save(menu);
 
     return menu;
   }

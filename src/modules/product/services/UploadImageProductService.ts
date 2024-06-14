@@ -105,7 +105,7 @@ class UploadImageProductService {
 
     menu.products = JSON.parse(JSON.stringify(productJSONArray));
 
-    this.productRepository.save(menu);
+    await this.productRepository.save(menu);
 
     return menu;
   }
