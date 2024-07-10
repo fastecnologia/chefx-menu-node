@@ -76,6 +76,7 @@ class UpdateMenuService {
             ...productExists,
             id: product.id,
             name: product.name,
+            price: product.price,
             category_id: product.category_id,
             description: product.description,
             is_promotional: product.is_promotional,
