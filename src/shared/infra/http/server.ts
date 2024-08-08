@@ -5,8 +5,6 @@ import express, { Request, Response, NextFunction } from 'express';
 import cors from 'cors';
 import 'express-async-errors';
 
-import bodyParser from 'body-parser';
-
 import uploadConfig from '../../../config/upload';
 
 import routes from './routes';
@@ -17,13 +15,11 @@ import '../../container';
 
 const app = express();
 
-app.use(express.json());
+app.use(express.json({ limit: '200mb' }));
+app.use(express.urlencoded({ limit: '200mb' }));
 app.use(cors());
 app.use(routes);
 app.use('/image_product', express.static(uploadConfig.tmpFolder));
-
-app.use(express.json({ limit: '50mb' }));
-app.use(express.urlencoded({ limit: '50mb' }));
 
 app.use((err: Error, request: Request, response: Response, _: NextFunction) => {
   if (err instanceof AppError) {
