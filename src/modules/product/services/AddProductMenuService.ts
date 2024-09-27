@@ -10,25 +10,32 @@ import IProductRepository from '../repositories/IProductRepository';
 import ICreateProductDTO from '../dtos/ICreateProductDTO';
 import { IProductJSON } from '../dtos/IProductDTO';
 
+interface IExtraProduct {
+  id: number;
+  name: string;
+  price: string;
+}
+
+interface IPizzaFlavor {
+  id: number;
+  name: string;
+  price: string;
+  description: string;
+}
+
 interface IRequestCreateProduct {
   id: number;
   name: string;
   price: string;
   category_id: number;
   description: string;
+  is_promotional: boolean;
+  promotional_price: string;
+  is_pizza: boolean;
+  count_flavors: number;
+  extra_products: IExtraProduct[];
+  pizza_flavors: IPizzaFlavor[];
 }
-
-// interface IExtraProduct {
-//   id: number;
-//   name: string;
-//   price: string;
-// }
-
-// interface IPizzaFlavor {
-//   id: number;
-//   name: string;
-//   price: string;
-// }
 
 // interface IProductJSON {
 //   id: number;
