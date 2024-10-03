@@ -6,7 +6,7 @@ import AppError from '../../../shared/errors/AppError';
 
 import { IStorageProvider } from '../../../shared/container/providers/StorageProvider/models/IStorageProvider';
 
-import Menu from '../../menu/infra/typeorm/schemas/Menu';
+// import Menu from '../../menu/infra/typeorm/schemas/Menu';
 
 import IMenuRepository from '../../menu/repositories/IMenuRepository';
 
@@ -63,7 +63,7 @@ class UploadImageProductService {
     customer_url,
     id,
     imageFilename,
-  }: IRequest): Promise<Menu | undefined> {
+  }: IRequest): Promise<IProductJSON | undefined> {
     const menu = await this.menuRepository.findMenuByCustomer(customer_url);
 
     if (!menu) {
@@ -107,7 +107,7 @@ class UploadImageProductService {
 
     await this.productRepository.save(menu);
 
-    return menu;
+    return product;
   }
 }
 
