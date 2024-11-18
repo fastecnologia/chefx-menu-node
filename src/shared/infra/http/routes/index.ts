@@ -1,5 +1,6 @@
 import { Router } from 'express';
 
+import categoryRouter from '@modules/category/infra/http/routes/category.routes';
 import menusRouter from '../../../../modules/menu/infra/http/routes/menus.routes';
 import productRouter from '../../../../modules/product/infra/http/routes/product.routes';
 import pizzaFlavorsRouter from '../../../../modules/product/infra/http/routes/pizza.flavors.routes';
@@ -7,6 +8,7 @@ import pizzaFlavorsRouter from '../../../../modules/product/infra/http/routes/pi
 const routes = Router();
 
 routes.use('/menu', menusRouter);
+routes.use('/categories', categoryRouter);
 routes.use('/product', productRouter);
 routes.use('/pizza_flavor', pizzaFlavorsRouter);
 
