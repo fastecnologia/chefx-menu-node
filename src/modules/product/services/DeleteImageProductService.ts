@@ -1,16 +1,19 @@
 import { injectable, inject } from 'tsyringe';
 
-import Menu from '../../menu/infra/typeorm/schemas/Menu';
 import AppError from '../../../shared/errors/AppError';
 
 import IMenuRepository from '../../menu/repositories/IMenuRepository';
 import IProductRepository from '../repositories/IProductRepository';
 
-import IUpdateProductDTO from '../dtos/IUpdateProductDTO';
 import { IProductJSON } from '../dtos/IProductDTO';
 
+interface IRequest {
+  customer_url: string;
+  id: number;
+}
+
 @injectable()
-class UpdateProductService {
+class DeleteImageProductService {
   constructor(
     @inject('MenuRepository')
     private menuRepository: IMenuRepository,
@@ -19,20 +22,7 @@ class UpdateProductService {
     private productRepository: IProductRepository,
   ) {}
 
-  public async execute({
-    customer_url,
-    id,
-    name,
-    price,
-    category_id,
-    description,
-    is_promotional,
-    promotional_price,
-    is_pizza,
-    count_flavors,
-    extra_products,
-    pizza_flavors,
-  }: IUpdateProductDTO): Promise<Menu | undefined> {
+  public async execute({ customer_url, id }: IRequest): Promise<void> {
     const menu = await this.menuRepository.findMenuByCustomer(customer_url);
 
     if (!menu) {
@@ -48,16 +38,8 @@ class UpdateProductService {
       if (product.id === id) {
         return {
           ...product,
-          name,
-          price,
-          category_id,
-          description,
-          is_promotional,
-          promotional_price,
-          is_pizza,
-          count_flavors,
-          extra_products,
-          pizza_flavors,
+          image: null,
+          image_url: null,
         };
       }
 
@@ -67,9 +49,7 @@ class UpdateProductService {
     menu.products = JSON.parse(JSON.stringify(updateProduct));
 
     await this.productRepository.save(menu);
-
-    return menu;
   }
 }
 
-export default UpdateProductService;
+export default DeleteImageProductService;
