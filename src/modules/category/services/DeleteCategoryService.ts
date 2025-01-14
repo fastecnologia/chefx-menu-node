@@ -5,20 +5,24 @@ import AppError from '../../../shared/errors/AppError';
 import IMenuRepository from '../../menu/repositories/IMenuRepository';
 import ICategoryRepository from '../repositories/ICategoryRepository';
 
+import { IProductJSON } from '../../product/dtos/IProductDTO';
+import { ICategoryJSON } from '../dtos/ICategoryDTO';
+
 interface IRequest {
   customer_url: string;
   id: number;
 }
 
-interface ICategoryJSON {
-  id: number;
-}
+// interface ICategoryJSON {
+//   id: number;
+// }
 
 @injectable()
 class DeleteCategoryService {
   constructor(
     @inject('MenuRepository')
     private menuRepository: IMenuRepository,
+
     @inject('CategoriesRepository')
     private categoriesRepository: ICategoryRepository,
   ) {}
@@ -30,16 +34,26 @@ class DeleteCategoryService {
       throw new AppError('Menu not exists');
     }
 
-    const convertStringToJSON = JSON.stringify(menu.categories);
-    const categoriesJSONArray = JSON.parse(convertStringToJSON) as Array<
-      ICategoryJSON
+    const convertCategoryStringToJSON = JSON.stringify(menu.categories);
+    const categoriesJSONArray = JSON.parse(
+      convertCategoryStringToJSON,
+    ) as Array<ICategoryJSON>;
+
+    const convertProductStringToJSON = JSON.stringify(menu.products);
+    const productJSONArray = JSON.parse(convertProductStringToJSON) as Array<
+      IProductJSON
     >;
 
     const deleteCategoryList = categoriesJSONArray.filter(
       category => category.id !== id,
     );
 
+    const deleteProductList = productJSONArray.filter(
+      product => product.category_id !== id,
+    );
+
     menu.categories = JSON.parse(JSON.stringify(deleteCategoryList));
+    menu.products = JSON.parse(JSON.stringify(deleteProductList));
 
     await this.categoriesRepository.save(menu);
   }
