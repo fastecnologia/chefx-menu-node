@@ -9,7 +9,7 @@ import pizzaFlavorsRouter from '../../../../modules/product/infra/http/routes/pi
 const routes = Router();
 
 routes.use('/menu', menusRouter);
-routes.use('/categories', categoryRouter);
+routes.use('/category', categoryRouter);
 routes.use('/product', productRouter);
 routes.use('/pizza_flavor', pizzaFlavorsRouter);
 
