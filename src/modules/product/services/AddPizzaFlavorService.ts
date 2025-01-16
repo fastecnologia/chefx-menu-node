@@ -87,7 +87,7 @@ class AddPizzaFlavorService {
     const addProductPizzaFlavor = productJSONArray.map(product => {
       if (product.id === product_id) {
         if (product.pizza_flavors.some(flavor => flavor.id === flavor_id)) {
-          throw new AppError('Flavor already exists!', 409);
+          throw new AppError('Flavor already exists!', 400);
         } else {
           return {
             ...product,
