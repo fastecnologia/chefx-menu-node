@@ -26,7 +26,7 @@ class PizzaFlavorController {
 
   public async update(request: Request, response: Response): Promise<Response> {
     const { customer_url } = request.params;
-    const { product_id, flavor_id, name, price, description } = request.body;
+    const { product_id, id, name, price, description } = request.body;
 
     const updatePizzaFlavorService = container.resolve(
       UpdatePizzaFlavorService,
@@ -35,7 +35,7 @@ class PizzaFlavorController {
     const menu = await updatePizzaFlavorService.execute({
       customer_url,
       product_id,
-      flavor_id,
+      flavor_id: id,
       name,
       price,
       description,
