@@ -43,7 +43,7 @@ class AddCategoryMenuService {
       name,
     };
 
-    const newCategoryArray = [...categoriesJSONArray, newCategory];
+    const newCategoryArray = [...categoriesJSONArray, newCategory].sort();
 
     menu.categories = JSON.parse(JSON.stringify(newCategoryArray));
 
