@@ -103,7 +103,11 @@ class AddProductMenuService {
       pizza_flavors,
     };
 
-    const newProductArray = [...productJSONArray, newProduct];
+    const newProductArray = [...productJSONArray, newProduct].sort(
+      (product, productCompare) => {
+        return product.name.localeCompare(productCompare.name);
+      },
+    );
 
     menu.products = JSON.parse(JSON.stringify(newProductArray));
 

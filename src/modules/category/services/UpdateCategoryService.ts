@@ -35,7 +35,7 @@ class UpdateCategoryService {
       ICategoryJSON
     >;
 
-    const categoryProduct = categoriesJSONArray.map(category => {
+    const categoriesProduct = categoriesJSONArray.map(category => {
       if (category.id === id) {
         return {
           ...category,
@@ -46,7 +46,13 @@ class UpdateCategoryService {
       return category;
     });
 
-    menu.categories = JSON.parse(JSON.stringify(categoryProduct));
+    const categoriesAlphabeticalOrder = categoriesProduct.sort(
+      (category, categoryCompare) => {
+        return category.name.localeCompare(categoryCompare.name);
+      },
+    );
+
+    menu.categories = JSON.parse(JSON.stringify(categoriesAlphabeticalOrder));
 
     await this.categoriesRepository.save(menu);
 

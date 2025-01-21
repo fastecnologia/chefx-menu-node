@@ -99,7 +99,15 @@ class AddPizzaFlavorService {
       return product;
     });
 
-    menu.products = JSON.parse(JSON.stringify(addProductPizzaFlavor));
+    const addProductPizzaFlavorsAlphabeticalOrder = addProductPizzaFlavor.sort(
+      (flavor, flavorCompare) => {
+        return flavor.name.localeCompare(flavorCompare.name);
+      },
+    );
+
+    menu.products = JSON.parse(
+      JSON.stringify(addProductPizzaFlavorsAlphabeticalOrder),
+    );
 
     await this.productRepository.save(menu);
 

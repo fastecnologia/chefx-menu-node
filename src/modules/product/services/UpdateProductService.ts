@@ -44,7 +44,7 @@ class UpdateProductService {
       IProductJSON
     >;
 
-    const updateProduct = productJSONArray.map(product => {
+    const updateProducts = productJSONArray.map(product => {
       if (product.id === id) {
         return {
           ...product,
@@ -64,7 +64,13 @@ class UpdateProductService {
       return product;
     });
 
-    menu.products = JSON.parse(JSON.stringify(updateProduct));
+    const productsAlphabeticalOrder = updateProducts.sort(
+      (product, productCompare) => {
+        return product.name.localeCompare(productCompare.name);
+      },
+    );
+
+    menu.products = JSON.parse(JSON.stringify(productsAlphabeticalOrder));
 
     await this.productRepository.save(menu);
 

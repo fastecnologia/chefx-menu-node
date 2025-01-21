@@ -43,7 +43,11 @@ class AddCategoryMenuService {
       name,
     };
 
-    const newCategoryArray = [...categoriesJSONArray, newCategory].sort();
+    const newCategoryArray = [...categoriesJSONArray, newCategory].sort(
+      (category, categoryCompare) => {
+        return category.name.localeCompare(categoryCompare.name);
+      },
+    );
 
     menu.categories = JSON.parse(JSON.stringify(newCategoryArray));
 
